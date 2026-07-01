@@ -1,0 +1,142 @@
+/* ════════════════════════════════════════════════════════════
+   خطوط فريق ألفا — Cairo (عناوين) + Tajawal (نصوص) — مطابقة web/
+   ponytail: @import يجب أن يسبق كل القواعد الأخرى (عدا @charset/@layer)،
+   لذا هذا السطر قبل @import "tailwindcss" نفسها وليس بعدها.
+   ════════════════════════════════════════════════════════════ */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap");
+
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════
+   نظام الألوان — منقول حرفياً من team-apk/constants/colors.ts
+   (راجع المصدر الأصلي: dark هو الافتراضي/هوية فريق ألفا، light بديل)
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --color-text: #f5f0e8;
+  --color-tint: #c8a870;
+  --color-background: #0e0c0a;
+  --color-foreground: #f2ede4;
+  --color-card: #14110e;
+  --color-card-foreground: #f5f0e8;
+  --color-primary: #c8a870;
+  --color-primary-foreground: #0e0c0a;
+  --color-secondary: #1e1a17;
+  --color-secondary-foreground: #f5f0e8;
+  --color-muted: #1a1713;
+  --color-muted-foreground: #b8afa0;
+  --color-accent: #282420;
+  --color-accent-foreground: #f5f0e8;
+  --color-destructive: #c85050;
+  --color-destructive-foreground: #f5f0e8;
+  --color-border: #2a2520;
+  --color-input: #282420;
+  --color-bronze: #c8a870;
+  --color-bronze-light: #dcc394;
+  --color-bronze-dark: #8b6635;
+  --color-success: #50c878;
+  --color-status-active: rgba(200, 168, 112, 0.92);
+  --color-status-completed: rgba(80, 200, 120, 0.92);
+  --color-status-upcoming: rgba(96, 144, 192, 0.92);
+  --color-status-paused: rgba(220, 80, 60, 0.92);
+  --radius-base: 16px;
+}
+
+:root.light {
+  --color-text: #0e0c0a;
+  --color-tint: #b8934a;
+  --color-background: #f5f0e8;
+  --color-foreground: #0e0c0a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0e0c0a;
+  --color-primary: #b8934a;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #ede8e0;
+  --color-secondary-foreground: #0e0c0a;
+  --color-muted: #e8e3db;
+  --color-muted-foreground: #6b6560;
+  --color-accent: #f0ebe3;
+  --color-accent-foreground: #0e0c0a;
+  --color-destructive: #c85050;
+  --color-destructive-foreground: #f5f0e8;
+  --color-border: #d4cfc8;
+  --color-input: #e0dbd4;
+  --color-bronze: #b8934a;
+  --color-bronze-light: #c8a870;
+  --color-bronze-dark: #8b6635;
+  --color-success: #1a7f37;
+  --color-status-active: rgba(184, 147, 74, 0.92);
+  --color-status-completed: rgba(26, 127, 55, 0.92);
+  --color-status-upcoming: rgba(37, 99, 235, 0.92);
+  --color-status-paused: rgba(220, 80, 60, 0.92);
+}
+
+/* ponytail: @theme يحوّل المتغيرات أعلاه لـutilities حقيقية بـTailwind v4
+   (مثل bg-background, text-bronze) — بدون أي tailwind.config.js. القيم
+   نفسها (الفاتح/الغامق) تبقى عبر CSS custom properties القابلة لإعادة
+   التعريف بـ:root.light، فالـutility classes تتفاعل تلقائياً مع تبديل الثيم. */
+@theme inline {
+  --color-text: var(--color-text);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-card: var(--color-card);
+  --color-card-foreground: var(--color-card-foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+  --color-destructive: var(--color-destructive);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+  --color-border: var(--color-border);
+  --color-input: var(--color-input);
+  --color-bronze: var(--color-bronze);
+  --color-bronze-light: var(--color-bronze-light);
+  --color-bronze-dark: var(--color-bronze-dark);
+  --color-success: var(--color-success);
+
+  --font-cairo: "Cairo", system-ui, sans-serif;
+  --font-tajawal: "Tajawal", system-ui, sans-serif;
+
+  --radius-card: 16px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: "Tajawal", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* RTL أساسي — الموقع عربي بالكامل */
+html {
+  direction: rtl;
+}
+
+/* احترام تفضيل تقليل الحركة (مطلوب من frontend-design skill) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus ring واضح للوصولية بدل outline:none صامت */
+:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
